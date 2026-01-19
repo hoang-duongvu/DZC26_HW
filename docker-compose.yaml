@@ -11,5 +11,24 @@ services:
     volumes:
       - nyc_taxi_data:/var/lib/postgresql/data
 
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:9.11
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - 8085:80
+
+  ingestion:
+    container_name: ingestion
+    image: pipeline:v1
+    depends_on:
+      - postgres
+      - pgadmin
+    environment:
+      YEAR: 2021
+      MONTH: 1
+
 volumes:
   nyc_taxi_data:
