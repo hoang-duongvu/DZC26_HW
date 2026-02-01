@@ -50,10 +50,23 @@ def run_yellow_taxi_pipeline(url: str = YELLOW_TAXI_URL, table_name: str = "yell
     return total_rows
 
 def main():
+    # if settings.COLOR == "green":
+    #     run_green_taxi_pipeline()
+    # elif settings.COLOR == "yellow":
+    #     run_yellow_taxi_pipeline()
+
+    ## Homework
     if settings.COLOR == "green":
-        run_green_taxi_pipeline()
+        total_green = 0
+        for i in range (1, 13):
+            total_green += run_green_taxi_pipeline(url=f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2020-{i:02d}.csv.gz")
+        print(f"Green: {total_green}")
+        
     elif settings.COLOR == "yellow":
-        run_yellow_taxi_pipeline()
+        total_yellow = 0
+        for i in range (1, 13):
+            total_yellow += run_yellow_taxi_pipeline(url=f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2020-{i:02d}.csv.gz")
+        print(f"Yellow: {total_yellow}")
 
 if __name__ == "__main__":
     main()
